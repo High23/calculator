@@ -1,6 +1,6 @@
-let userInputNumber = Number(prompt('Enter a number '));
-let userInputOperator = prompt('Operator "+, -, *, /" ')
-let userInputNumberTwo = Number(prompt('Enter a number '));
+let userInputNumber = 0;
+let userInputOperator = '+';
+let userInputNumberTwo = 0;
 
 function add(numberOne, numberTwo){
     return numberOne + numberTwo;
@@ -29,5 +29,12 @@ function operate(number, operator, numberTwo){
         return divide(number, numberTwo);
     }
 }
+const display = document.querySelector("div.display.flex");
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        display.textContent = button.value;
+    });
+});
 console.log(operate(userInputNumber, userInputOperator, userInputNumberTwo));
 
