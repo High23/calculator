@@ -31,44 +31,20 @@ let userInputNumberTwo = '';
 let counter = 0;
 
 const display = document.querySelector("div.display.flex");
-const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-        if (button.value === "clear" || (counter == 0 && button.value == '=')){
-            userInputNumber = '';
-            userInputOperator = '';
-            userInputNumberTwo = '';
-            counter = 0;
-            display.textContent = '0';
-            return;
-        }
-        if (button.value == '+' || button.value == '-' || button.value == '/' || button.value == '*' || button.value == '%'){
-                userInputOperator = button.value;
-                console.log(userInputOperator);
-                counter = 1;
-                return;
-        }
+const numberButtons = document.querySelectorAll("div.numbers > button");
+const operatorButtons = document.querySelectorAll("div.ops > button");
+const extraOpsButtons = document.querySelectorAll("div.extra-ops > button");
+numberButtons.forEach((button) => {
+    button.addEventListener('click', () => {   
         if (counter === 1 && !(userInputNumber == '')){
-            userInputNumberTwo += button.value;
             if (button.value == '='){
-                if (userInputNumberTwo == '='){
-                    userInputNumberTwo = '';
-                    return;
-                }
                 userInputNumber = operate(Number(userInputNumber), userInputOperator, Number(userInputNumberTwo));
                 display.textContent = userInputNumber;
                 userInputNumberTwo = '';
-                console.log(button.value);
-                return;
-            } else if (userInputOperator && !(userInputNumberTwo == '')){
-                userInputNumber = operate(Number(userInputNumber), userInputOperator, Number(userInputNumberTwo));
-                display.textContent = userInputNumber;
-                userInputNumberTwo = '';
-                console.log(userInputOperator);
                 return;
             }
+            userInputNumberTwo += button.value;
             display.textContent = userInputNumberTwo;
-            console.log(userInputNumberTwo);
         } else {
             if (button.value == '='){
                 counter = 0;
@@ -76,9 +52,30 @@ buttons.forEach((button) => {
             }
             userInputNumber += button.value;
             display.textContent = userInputNumber;
-            console.log(userInputNumber);
         } 
     });
 });
-console.log(operate(userInputNumber, userInputOperator, userInputNumberTwo));
-
+operatorButtons.forEach((button) => {
+    button.addEventListener('click', () =>{
+        if (userInputOperator && !(userInputNumberTwo == '')){
+            userInputNumber = operate(Number(userInputNumber), userInputOperator, Number(userInputNumberTwo));
+            display.textContent = userInputNumber;
+            userInputNumberTwo = '';
+        }
+        userInputOperator = button.value;
+        counter = 1;
+    });
+});
+extraOpsButtons.forEach((button) => {
+    button.addEventListener('click', () =>{
+        if (button.value === "clear"){
+            userInputNumber = '';
+            userInputOperator = '';
+            userInputNumberTwo = '';
+            counter = 0;
+            display.textContent = '0';
+            return;
+        }
+        
+    });
+});
