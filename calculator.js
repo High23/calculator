@@ -34,13 +34,17 @@ const display = document.querySelector("div.display.flex");
 const numberButtons = document.querySelectorAll("div.numbers > button");
 const operatorButtons = document.querySelectorAll("div.ops > button");
 const extraOpsButtons = document.querySelectorAll("div.extra-ops > button");
+const decimal = document.querySelector("#decimal")
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {   
+        if (button.value == '.') decimal.disabled = true;
         if (counter === 1 && !(userInputNumber == '')){
             if (button.value == '='){
+                if (userInputOperator == '/' && userInputNumberTwo == '0') return display.textContent = LOL;
                 userInputNumber = operate(Number(userInputNumber), userInputOperator, Number(userInputNumberTwo));
                 display.textContent = userInputNumber;
                 userInputNumberTwo = '';
+                decimal.disabled = false;
                 return;
             }
             userInputNumberTwo += button.value;
@@ -58,10 +62,12 @@ numberButtons.forEach((button) => {
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () =>{
         if (userInputOperator && !(userInputNumberTwo == '')){
+            if (userInputOperator == '/' && userInputNumberTwo == '0') return display.textContent = LOL;
             userInputNumber = operate(Number(userInputNumber), userInputOperator, Number(userInputNumberTwo));
             display.textContent = userInputNumber;
             userInputNumberTwo = '';
         }
+        decimal.disabled = false;
         userInputOperator = button.value;
         counter = 1;
     });
@@ -76,6 +82,6 @@ extraOpsButtons.forEach((button) => {
             display.textContent = '0';
             return;
         }
-        
     });
+    
 });
