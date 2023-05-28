@@ -1,17 +1,21 @@
 function add(number, numberTwo){
+    number = Number(number);
+    numberTwo = Number(numberTwo);
     if (!Number.isInteger(number) || !Number.isInteger(numberTwo)){
-        let total = Number(number) + Number(numberTwo);
+        let total = number + numberTwo;
         return total.toFixed(2);
     }
-    return Number(number) + Number(numberTwo);
+    return number + numberTwo;
 }
 
 function subtraction(number, numberTwo){
+    number = Number(number);
+    numberTwo = Number(numberTwo);
     if (!Number.isInteger(number) || !Number.isInteger(numberTwo)){
         let total = number - numberTwo;
         return total.toFixed(2);
     }
-    return Number(number) - Number(numberTwo);
+    return number - numberTwo;
 }
 
 function multiply(number, numberTwo){
@@ -50,6 +54,15 @@ function operate(number, operator, numberTwo){
         return modularDivision(number, numberTwo);
     }
 }
+
+function clear(){
+    userInputNumber = '';
+    userInputOperator = '';
+    userInputNumberTwo = '';
+    counter = 0;
+    display.textContent = 0;
+}
+
 let userInputNumber = '';
 let userInputOperator = '';
 let userInputNumberTwo = '';
@@ -66,7 +79,10 @@ numberButtons.forEach((button) => {
         if (counter === 1 && !(userInputNumber == '')){
             if (button.value == '='){
                 if (userInputNumberTwo == '.') userInputNumberTwo = 0;
-                if (userInputOperator == '/' && userInputNumberTwo == 0) return display.textContent = 'LOL';
+                if (userInputOperator == '/' && userInputNumberTwo == '0'){
+                    clear();
+                    return display.textContent = 'LOL';
+                }
                 userInputNumber = operate(userInputNumber, userInputOperator,userInputNumberTwo);
                 display.textContent = userInputNumber;
                 if (userInputNumber == 0) userInputNumber = '';
@@ -86,7 +102,10 @@ numberButtons.forEach((button) => {
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () =>{
         if (userInputOperator && !(userInputNumberTwo == '')){
-            if (userInputOperator == '/' && userInputNumberTwo == '0') return display.textContent = 'LOL';
+            if (userInputOperator == '/' && userInputNumberTwo == '0'){
+                clear();
+                return display.textContent = 'LOL';
+            }
             userInputNumber = operate(userInputNumber, userInputOperator, userInputNumberTwo);
             display.textContent = userInputNumber;
             userInputNumberTwo = '';
@@ -99,12 +118,7 @@ operatorButtons.forEach((button) => {
 extraOpsButtons.forEach((button) => {
     button.addEventListener('click', () =>{ 
         if (button.value === "clear"){
-            userInputNumber = '';
-            userInputOperator = '';
-            userInputNumberTwo = '';
-            counter = 0;
-            display.textContent = 0;
-            return;
+            return clear();
         } else if (button.value === "back" && !(userInputNumberTwo === '') && counter === 1){
             userInputNumberTwo = userInputNumberTwo.split("");
             if (userInputNumberTwo.length <= 1){
