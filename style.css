@@ -24,7 +24,6 @@ html, body {
     background-color: rgba(170, 170, 170, 0.61);
     border: 6px solid black;
     padding: 10px;
-    margin: 0px 1px;
     max-height: 50px;
 }
 button {
@@ -40,7 +39,7 @@ button {
     display: inherit;
     max-height: 300px;
     flex-direction: column;
-    flex: 0 1 75px
+    flex: 0 1 75px;
 }
 
 div.flex.numbers.extra-ops {
