@@ -45,9 +45,11 @@ numberButtons.forEach((button) => {
         if (button.value == '.') decimal.disabled = true;
         if (counter === 1 && !(userInputNumber == '')){
             if (button.value == '='){
-                if (userInputOperator == '/' && userInputNumberTwo == '0') return display.textContent = 'LOL';
+                if (userInputNumberTwo == '.') userInputNumberTwo = 0;
+                if (userInputOperator == '/' && userInputNumberTwo == 0) return display.textContent = 'LOL';
                 userInputNumber = operate(Number(userInputNumber), userInputOperator, Number(userInputNumberTwo));
                 display.textContent = userInputNumber;
+                if (userInputNumber == 0) userInputNumber = '';
                 userInputNumberTwo = '';
                 decimal.disabled = false;
                 return;
