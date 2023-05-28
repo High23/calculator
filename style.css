@@ -31,8 +31,10 @@ button {
     font-size: 24px; 
     height: 75px;
     padding: 10px;
-    border-radius: 7px;
-    flex: 0 1 75px; 
+    flex: 0 1 75px;
+    background-color: #101419;
+    border-color: black;
+    color: azure;
 }
 .ops {
     display: inherit;
@@ -58,4 +60,14 @@ span {
 
 #button0 {
     flex: 1;
+}
+
+div.numbers > button {
+    color: #101419;
+    background-color: wheat;
+}
+
+#equals {
+    color: azure;
+    background-color: red;
 }
