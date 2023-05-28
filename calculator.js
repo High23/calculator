@@ -19,6 +19,8 @@ function subtraction(number, numberTwo){
 }
 
 function multiply(number, numberTwo){
+    number = Number(number);
+    numberTwo = Number(numberTwo);
     if (!Number.isInteger(number) || !Number.isInteger(numberTwo)){
         let total = number * numberTwo;
         return total.toFixed(2);
@@ -27,6 +29,8 @@ function multiply(number, numberTwo){
 }
 
 function divide(number, numberTwo){
+    number = Number(number);
+    numberTwo = Number(numberTwo);
     if (!Number.isInteger(number) || !Number.isInteger(numberTwo)){
         let total = number / numberTwo;
         return total.toFixed(2);
@@ -34,6 +38,8 @@ function divide(number, numberTwo){
     return number / numberTwo;
 }
 function modularDivision(number, numberTwo){
+    number = Number(number);
+    numberTwo = Number(numberTwo);
     if (!Number.isInteger(number) || !Number.isInteger(numberTwo)){
         let total = number % numberTwo;
         return total.toFixed(2);
